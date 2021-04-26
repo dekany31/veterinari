@@ -4,9 +4,9 @@ import Pet from "./Pet"
 function Client(props) {
   console.log("client =", props.data)
   return (
-    <div>
+    <div className="Client">
       <p>{props.data.name}</p>
-      {props.data.pets.map((pet, i) =>  <Pet key={i.toString + "-pet"}/>)}
+      {props.data.pets.map((pet, i) =>  <Pet petdata={pet} key={i.toString + "-pet"}/>)}
     </div>
   )
 }
