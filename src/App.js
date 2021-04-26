@@ -1,6 +1,7 @@
 import './App.css'
 import React, {useState} from "react"
 import LoadingMask from "./components/LoadingMask"
+import Client from "./components/Client"
 
 
 const App = () => {
@@ -35,7 +36,7 @@ const App = () => {
         loading ? <LoadingMask />
               : data === null 
                       ? <p>OOppss!</p>
-                      : data.map((item) => item.name)  
+                      : data.map((item, i) => <Client data={item} key={i.toString() + "-client"} />)  
       }
     </div>
   )
