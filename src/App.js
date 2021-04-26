@@ -1,5 +1,6 @@
 import './App.css'
 import React, {useState} from "react"
+import LoadingMask from "./components/LoadingMask"
 
 
 const App = () => {
@@ -21,15 +22,21 @@ const App = () => {
                     } 
           )
     .finally( () => (setLoading(false)) )
-  }, [])
-
   }
+
+  
 
   return (
     <div className="App">
       <h1>Veterinari admin</h1>
       <input type="text" onChange={(ev)=>(setSearch(ev.target.value)) }/>
       <button disabled="" onClick={() => (startF())}>Search</button>
+      {
+        loading ? <LoadingMask />
+              : data === null 
+                      ? <p>OOppss!</p>
+                      : data.map((item) => item.name)  
+      }
     </div>
   )
 }
