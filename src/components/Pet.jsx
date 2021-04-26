@@ -9,7 +9,8 @@ function Pet(props) {
   const [ response, setResponse ] = useState(null);
   const [show, setShow] = useState(false);
 
-const savePats = () => {
+const savePats = (petname, vaccinated) => {
+  setShow(true)
   fetch('/api/pets',
   { method: 'POST',
     mode: 'cors',
@@ -17,12 +18,12 @@ const savePats = () => {
     'Content-Type': 'application/json'
              },
     body: JSON.stringify({
-        name: props.petdata.name,
-        isVaccinated: toggle
+        name: petname,
+        isVaccinated: vaccinated
     })
   })
   .then( (resp) => (setResponse(true)) )
-  .then ( (adat) => {console.log(adat); setData(adat) })
+  .then ( (adat) => {setToggle(vaccinated); setData(adat) })
   .catch( (err) => {
                     console.log("FetchError=", err);
                     setResponse(false);
@@ -38,7 +39,7 @@ const savePats = () => {
       <p>{props.petdata.name}({props.petdata.animal}) - "Vaccinated:" 
       
         
-      <button onClick={() => setToggle(!toggle)}>
+      <button onClick={() => savePats(props.petdata.name, !toggle)}>
          {show ? "..."
                 :toggle ? "true"
                         : "false"
